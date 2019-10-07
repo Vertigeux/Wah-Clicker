@@ -1,0 +1,29 @@
+button {
+  background-color: #6f2bbf;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  padding: 10px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: indigo;
+  margin: 5px 5px;
+}
+
+button:hover {
+  background-color: indigo;
+}
+
+button:active {
+  background-color: black;
+}
+
+p {
+	text-align: center;
+	color: white;
+}
+
+body {
+	background-color: #985be6;
+}
