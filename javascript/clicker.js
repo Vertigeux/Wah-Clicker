@@ -5,6 +5,7 @@ var timer;
 var nextWah = 5;
 var baseAutoWahTime = 2000;
 var autoEnabled = true;
+var cowardMode = false;
 
 function wahEvent(){
 	var wahAudio = new Audio("res/wah.mp3");
@@ -19,8 +20,13 @@ function wahEvent(){
     }
 	document.getElementById("totalWah").innerHTML = wahCount;
 	document.getElementById('waluigiPicture').src='res/waluigiOpen.jpg';
-	wahAudio.play();
-	wahAudio.onended = wahEventEnd;
+    if(!cowardMode){
+	    wahAudio.play();
+	    wahAudio.onended = wahEventEnd;
+    }
+    else{
+        wahEventEnd();
+    }
 	
 }
 
@@ -60,6 +66,10 @@ function stopStartEvent(){
     }
 }
 
+function cowardEvent(){
+    cowardMode = true;
+}
+
 function getWahPerSecond(){
     return (1 / ((baseAutoWahTime / autoWahCount) / 1000)).toString();
 }
@@ -68,6 +78,7 @@ window.onload = function() {
 	document.getElementById("wahButton").onclick = wahEvent;
     document.getElementById("autoWahButton").onclick = newAutoEvent;
     document.getElementById("stopButton").onclick = stopStartEvent;
+    document.getElementById("cowardButton").onclick = cowardEvent;
     document.getElementById("autoWahButton").disabled = true;
     document.getElementById("wahPerSecond").innerHTML = "0";
     document.getElementById("wahsRemaining").innerHTML = nextWah;
