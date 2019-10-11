@@ -19,6 +19,10 @@ button:active {
   background-color: black;
 }
 
+button:disabled {
+  background-color: #985be6;
+}
+
 p {
 	text-align: center;
 	color: white;
