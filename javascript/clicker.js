@@ -12,28 +12,11 @@ var berserkTimeRemaining;
 var berserkCooldown = false;
 
 function wahEvent(){
-	var wahAudio = new Audio("res/wah.mp3");
-	wahCount++;
-	currentWah++;
-    if(wahCount >= nextWah){
-        document.getElementById("autoWahButton").disabled = false;
-    }
-	document.getElementById("totalWah").innerHTML = wahCount;
-	document.getElementById('waluigiPicture').src='res/waluigiOpen.jpg';
-    if(!cowardMode){
-	    wahAudio.play();
-	    wahAudio.onended = wahEventEnd;
-    }
-    else{
-        wahEventEnd();
-    }
-	
-}
-
-function wahEventEnd(){
-	currentWah--;
-	if(currentWah == 0){
-		document.getElementById('waluigiPicture').src='res/waluigi.jpg'
+	if(berserkMode){
+		playBerserkWah(5);
+	}
+	else{
+		playWah();
 	}
 }
 
@@ -79,15 +62,39 @@ function cowardEvent(){
 function berserkEvent(){
 	if(!berserkMode){
 		berserkMode = true;
-		document.getElementById("wahButton").onclick = berserkWahEvent;
-		berserkTimeRemaining = 5;
+		berserkTimeRemaining = 20;
 		berserkTimer = setInterval(berserkCountdown, 1000);
 	}
 }
 
-function berserkWahEvent(){
-	for(var i = 0; i < 10; i++){
-		wahEvent();
+function playWah(){
+	var wahAudio = new Audio("res/wah.mp3");
+	wahCount++;
+	currentWah++;
+    if(wahCount >= nextWah){
+        document.getElementById("autoWahButton").disabled = false;
+    }
+	document.getElementById("totalWah").innerHTML = wahCount;
+	document.getElementById('waluigiPicture').src='res/waluigiOpen.jpg';
+    if(!cowardMode){
+	    wahAudio.play();
+	    wahAudio.onended = wahEnd;
+    }
+    else{
+        wahEnd();
+    }
+}
+
+function playBerserkWah(wahsToPlay){
+	for(i = 0; i < wahsToPlay; i++){
+		setTimeout(playWah, 100*i);
+	}
+}
+
+function wahEnd(){
+	currentWah--;
+	if(currentWah == 0){
+		document.getElementById('waluigiPicture').src='res/waluigi.jpg'
 	}
 }
 
@@ -100,7 +107,7 @@ function berserkCountdown(){
 		if(!berserkCooldown){
 			document.getElementById("wahButton").onclick = wahEvent;
 			document.getElementById("berserk").disabled = true;
-			berserkTimeRemaining = 5;
+			berserkTimeRemaining = 120;
 			berserkTimer = setInterval(berserkCountdown, 1000);
 			berserkCooldown = true;
 			berserkMode = false;
