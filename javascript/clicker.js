@@ -53,9 +53,11 @@ function stopStartEvent(){
 function cowardEvent(){
 	if(!cowardMode){
 		cowardMode = true;
+		document.getElementById("cowardCallout").innerText = "YOU ARE A COWARD";
 	}
 	else{
 		cowardMode = false;
+		document.getElementById("cowardCallout").innerText = "";
 	}
 }
 

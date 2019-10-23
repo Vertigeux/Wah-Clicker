@@ -31,3 +31,9 @@ p {
 body {
 	background-color: #985be6;
 }
+
+#cowardCallout {
+	color: red;
+	font-size: 500%;
+	text-shadow: -2px 0 indigo, 0 2px indigo, 2px 0 indigo, 0 -2px indigo;
+}
